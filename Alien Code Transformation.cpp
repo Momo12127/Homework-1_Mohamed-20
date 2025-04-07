@@ -2,28 +2,22 @@
 using namespace std;
 
 int main() {
-    int x; 
+    int x;
     cin >> x;
 
-    int result = 0; 
-    int place = 1; 
+    int result = 0;
+    int place = 1;
 
     while (x > 0) {
-        int d = x % 10; 
-        int transformed = 9 - d; 
+        int digit = x % 10;
+        int minDigit = min(digit, 9 - digit);
+        
+        result += minDigit * place;
 
-      
-        if (d < transformed) {
-            result += d * place; 
-        }
-        else {
-            result += transformed * place; 
-        }
-
-        x /= 10; 
-        place *= 10; 
+        x /= 10;
+        place *= 10;
     }
 
-    cout << result << endl; 
+    cout << result << endl;
     return 0;
 }
