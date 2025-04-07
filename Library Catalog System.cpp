@@ -1,50 +1,46 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
 
-    string catalog[100];
+    string catalog[100]; 
     for (int i = 0; i < n; ++i) {
         string title;
         cin >> title;
 
         bool found = false;
-        for (int j = 0; j < i; ++j) {
-            if (catalog[j] == title) {
-                found = true;
-                int count = 1;
-                string newTitle = title;
+        int count = 1;
+        string newTitle = title;
 
-             
-                while (true) {
-                    newTitle = title + (char)('0' + count);  
-                    bool exists = false;
-                    for (int k = 0; k < i; ++k) {
-                        if (catalog[k] == newTitle) {
-                            exists = true;
-                            break;
-                        }
-                    }
-
-                    if (!exists) {
-                        catalog[i] = newTitle;
-                        cout << newTitle << endl;
-                        break;
-                    }
-
-                    count++;
+       
+        while (true) {
+            found = false;
+            for (int j = 0; j < i; ++j) {
+                if (catalog[j] == newTitle) {
+                    found = true;
+                    break;
                 }
+            }
+
+            if (!found) {
                 break;
             }
+
+            newTitle = title + to_string(count);
+            count++;
         }
 
-        if (!found) {
-            catalog[i] = title;
+        catalog[i] = newTitle; 
+        if (newTitle == title) {
             cout << "OK" << endl;
+        } else {
+            cout << newTitle << endl;
         }
     }
 
     return 0;
 }
+
